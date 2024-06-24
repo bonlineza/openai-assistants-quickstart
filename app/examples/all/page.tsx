@@ -11,10 +11,11 @@ const FunctionCalling = () => {
   const [weatherData, setWeatherData] = useState({});
 
   const functionCallHandler = async (call) => {
-    if (call?.function?.name !== "get_weather") return;
+    if (call?.function?.name !== "get_order") return;
+    console.log("The function");
     const args = JSON.parse(call.function.arguments);
     const data = getWeather(args.location);
-    setWeatherData(data);
+    // setWeatherData(data);
     return JSON.stringify(data);
   };
 
@@ -39,19 +40,19 @@ const FunctionCalling = () => {
   // );
 
   return (
-    <main className={styles.main}>
-      <div className={styles.container}>
-        <div className={styles.column}>
-          <WeatherWidget {...weatherData} />
-          <FileViewer />
-        </div>
-        <div className={styles.chatContainer}>
-          <div className={styles.chat}>
-            <Chat functionCallHandler={functionCallHandler} />
-          </div>
-        </div>
-      </div>
-    </main>
+    // <main className={styles.main}>
+    //   <div className={styles.container}>
+    //     {/* <div className={styles.column}>
+    //       <WeatherWidget {...weatherData} />
+    //       <FileViewer />
+    //     </div> */}
+    //     <div className={styles.chatContainer}>
+    //       <div className={styles.chat}>
+    //         {/* <Chat functionCallHandler={functionCallHandler} /> */}
+    //       </div>
+    //     </div>
+    //   </div>
+    // </main>
   );
 };
 
