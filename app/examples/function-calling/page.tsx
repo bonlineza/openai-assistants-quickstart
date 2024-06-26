@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import styles from "../shared/page.module.css";
 import Chat from "../../components/chat";
 import WeatherWidget from "../../components/weather-widget";
-import { getData, getWeather } from "../../utils/weather";
+import { getData, getWeather } from "../../utils/requests";
 import { RequiredActionFunctionToolCall } from "openai/resources/beta/threads/runs/runs";
 
 interface WeatherData {
@@ -18,14 +18,15 @@ const FunctionCalling = () => {
   const isEmpty = Object.keys(weatherData).length === 0;
 
   const functionCallHandler = async (call: RequiredActionFunctionToolCall) => {
-    if (call?.function?.name !== "get_order") return;
+    if (call?.function?.name !== "get_user_profile") return;
 
     const args = JSON.parse(call.function.arguments);
     console.log("Arguments", args);
 
     try {
-      const data = await getData(args.order_number); // Await the asynchronous function call
+      const data = await getData(args.contact_number);
       console.log("The returned data", data);
+      // @ts-ignore
       setWeatherData(data);
       return JSON.stringify(data);
     } catch (error) {

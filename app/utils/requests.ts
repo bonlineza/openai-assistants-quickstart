@@ -1,4 +1,5 @@
 import axios from "axios";
+import { profile } from "console";
 
 const getWeather = (location) => {
   // chose a random temperature and condition
@@ -16,29 +17,17 @@ const getWeather = (location) => {
 
 export { getWeather };
 
-const getData = async (orderID) => {
+const getData = async (contactNumber) => {
   try {
     const response = await axios.post('http://localhost:8008/shop/test', {
-      order_number: orderID
+      contact_number: contactNumber
     });
 
     if (response.status === 200) {
-      const purchase = response.data.purchase;
-
-      console.log(purchase);
-
-      // Extract the needed fields
-      const orderDate = new Date(purchase.order_date);
-      const formattedOrderDate = orderDate.toLocaleDateString('en-GB', {
-        day: 'numeric', month: 'long', year: 'numeric'
-      });
+      const data = response.data;
 
       return {
-        order_date: formattedOrderDate,
-        purchase_status: purchase.purchase_status,
-        products: purchase.products,
-        is_paid: purchase.is_paid,
-        estimated_payout_date: purchase.estimated_payout_date,
+        profile: data
       };
     } else {
       console.log('failed here')

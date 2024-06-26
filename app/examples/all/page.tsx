@@ -4,14 +4,14 @@ import React, { useState } from "react";
 import styles from "./page.module.css";
 import Chat from "../../components/chat";
 import WeatherWidget from "../../components/weather-widget";
-import { getWeather } from "../../utils/weather";
+import { getWeather } from "../../utils/requests";
 import FileViewer from "../../components/file-viewer";
 
 const FunctionCalling = () => {
   const [weatherData, setWeatherData] = useState({});
 
   const functionCallHandler = async (call) => {
-    if (call?.function?.name !== "get_order") return;
+    if (call?.function?.name !== "get_user_profile") return;
     console.log("The function");
     const args = JSON.parse(call.function.arguments);
     const data = getWeather(args.location);
@@ -19,40 +19,10 @@ const FunctionCalling = () => {
     return JSON.stringify(data);
   };
 
-  // return (
-  //   <main className={styles.main}>
-  //     <div className={styles.container}>
-  //       <div className={styles.fileViewer}>
-  //         <FileViewer />
-  //       </div>
-  //       <div className={styles.chatContainer}>
-  //         <div className={styles.weatherWidget}>
-  //           <div className={styles.weatherContainer}>
-  //             <WeatherWidget {...weatherData} />
-  //           </div>
-  //         </div>
-  //         <div className={styles.chat}>
-  //           <Chat functionCallHandler={functionCallHandler} />
-  //         </div>
-  //       </div>
-  //     </div>
-  //   </main>
-  // );
-
   return (
-    // <main className={styles.main}>
-    //   <div className={styles.container}>
-    //     {/* <div className={styles.column}>
-    //       <WeatherWidget {...weatherData} />
-    //       <FileViewer />
-    //     </div> */}
-    //     <div className={styles.chatContainer}>
-    //       <div className={styles.chat}>
-    //         {/* <Chat functionCallHandler={functionCallHandler} /> */}
-    //       </div>
-    //     </div>
-    //   </div>
-    // </main>
+    <main className={styles.main}>
+      <h1>Test</h1>
+    </main>
   );
 };
 
